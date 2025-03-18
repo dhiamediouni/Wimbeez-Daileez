@@ -53,8 +53,8 @@ Wimbee is built to streamline online meetings by offering an AI-powered avatar t
 - **Vector Store for Context Management**
 
 ## Final Interface
-![Wimbee Final Interface](path/to/final_interface.png)
-_(Replace `path/to/final_interface.png` with the actual image file location)_
+![Wimbee Final Interface](Image1.png)
+
 
 ## Challenges Faced
 - **Limited Computational Resources**: Slowed down development and processing.
