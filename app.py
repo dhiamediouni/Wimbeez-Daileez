@@ -70,9 +70,24 @@ prompt = PromptTemplate(
 logger.debug("PromptTemplate initialized.")
 
 # Create LLM chain
+# Read token from environment (Space secret should set HUGGINGFACEHUB_API_TOKEN)
+hf_token = (
+    os.getenv("HUGGINGFACEHUB_API_TOKEN")
+    or os.getenv("HF_TOKEN")
+    or os.getenv("HUGGINGFACE_HUB_TOKEN")
+)
+if not hf_token:
+    logger.error(
+        "Missing Hugging Face token. Please set 'HUGGINGFACEHUB_API_TOKEN' in your Space secrets."
+    )
+    raise RuntimeError(
+        "Hugging Face Inference API token is required. Set HUGGINGFACEHUB_API_TOKEN as a secret."
+    )
+
 mistral_llm = HuggingFaceHub(
     repo_id='mistralai/Mistral-7B-Instruct-v0.3',
-    model_kwargs={'temperature': 0.1, 'max_length': 2048, 'top_k':50},
+    huggingfacehub_api_token=hf_token,
+    model_kwargs={'temperature': 0.1, 'max_new_tokens': 512, 'top_k': 50},
 )
 logger.debug("HuggingFaceHub LLM initialized.")
 
